@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QrShare</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor">
+    <link href="/css/main.css" rel="stylesheet">
+
+</head>
+<body class="d-flex flex-column h-100">
+
+    <main class="flex-shrink-0">
+        <div class="container">
+            <h1 class="mt-5"><a href="/">Qr-Share</a></h1>
+            <p class="lead">Easily share files encrypted via QR-Codes!</p>
+        </div>
+    </main>
+
+    <div class="container">
+        <div style="padding: 10px; border-radius: 3px;">
+            <div class="row" id="file-picker">
+                <input type="file" id="file-upload" class="form-control">
+            </div>
+            <div class="progress row mt-2" id="download-progress-div" style="display:none">
+                <div id="download-progress" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5" id="upload-success" style="display:none">
+        <div class="d-flex justify-content-center"><h2>Uploaded successfully!</h2></div>
+        <div class="d-flex justify-content-center"><h3>Share via QR-Code:</h3></div>
+        <div class="d-flex justify-content-center"><div id="qrcode"></div></div>
+        <div class="d-flex justify-content-center"><h3>Share via Link:</h3></div>
+        <div class="d-flex justify-content-center"><input type="text" readonly class="form-control text-center" value="" id="sharelink"></div>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted"><a href="/faq">FAQ</a></span>
+        </div>
+    </footer>
+
+    <script src="/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/qrcode.min.js"></script>
+</body>
+</html>
