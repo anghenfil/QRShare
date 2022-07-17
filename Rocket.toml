@@ -1,0 +1,2 @@
+[default]
+limits = { file = "2 GB", form = "2 GB", data-form = "2 GB"}
