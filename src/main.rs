@@ -7,16 +7,13 @@ use std::io::ErrorKind::NotFound;
 use std::sync::RwLock;
 use crate::storage::FileMetadata;
 use rocket::serde::json::Json;
-
-pub mod storage;
-
-use rocket::data::{Data, Limits, ToByteUnit};
-use rocket::fairing::AdHoc;
 use rocket::form::Form;
 use rocket::fs::{FileServer, TempFile};
 use rocket::http::Status;
 use rocket::State;
 use rocket_dyn_templates::{context, Template};
+
+pub mod storage;
 
 #[get("/")]
 fn index() -> Template {
