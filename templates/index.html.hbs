@@ -14,14 +14,28 @@
     <main class="flex-shrink-0">
         <div class="container">
             <h1 class="mt-5"><a href="/">Qr-Share</a></h1>
-            <p class="lead">Easily share files encrypted via QR-Codes!</p>
+            <p class="lead">Easily share files up to 2 GB encrypted via QR-Codes!</p>
         </div>
     </main>
 
     <div class="container">
         <div style="padding: 10px; border-radius: 3px;">
-            <div class="row" id="file-picker">
-                <input type="file" id="file-upload" class="form-control">
+            <div class="row mt-2">
+                <select class="form-select form-select-lg" id="auto-delete-select">
+                    <option value="default" selected>Auto delete file after 24h</option>
+                    <option value="5">5 min</option>
+                    <option value="10">10 min</option>
+                    <option value="15">15 min</option>
+                    <option value="30">30 min</option>
+                    <option value="60">1 hour</option>
+                    <option value="120">2 hours</option>
+                    <option value="240">4 hours</option>
+                    <option value="480">8 hours</option>
+                    <option value="960">16 hours</option>
+                </select>
+            </div>
+            <div class="row mt-2" id="file-picker">
+                <input type="file" id="file-upload" class="form-control form-control-lg">
             </div>
             <div class="progress row mt-2" id="download-progress-div" style="display:none">
                 <div id="download-progress" class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
@@ -43,7 +57,7 @@
     </footer>
 
     <script src="/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/encrypt.js"></script>
     <script src="/js/qrcode.min.js"></script>
 </body>
 </html>

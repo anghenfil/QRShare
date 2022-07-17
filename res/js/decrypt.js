@@ -1,7 +1,6 @@
 window.addEventListener('load', async function () {
     let hash = window.atob(window.location.hash.replace("#key=", ""));
     let file_id = window.location.pathname.replace("/d/", "");
-    console.log("Key:" + hash + " File:" + file_id);
 
     let metadata = await load_metadata(file_id);
     let key = await window.crypto.subtle.importKey(
@@ -33,7 +32,6 @@ async function load_file(file_id, key, iv, filename){
     const xhr = new XMLHttpRequest();
     xhr.responseType = "arraybuffer";
     xhr.onload = async () => {
-        console.log(`The transfer is completed: ${xhr.status}`);
         let decrypted = await window.crypto.subtle.decrypt(
             {
                 name: "AES-GCM",
@@ -50,11 +48,11 @@ async function load_file(file_id, key, iv, filename){
     };
 
     xhr.onerror = () => {
-        console.error('Download failed.');
+        alert('Download failed.');
     }
 
     xhr.onabort = () => {
-        console.error('Download cancelled.');
+        alert('Download cancelled.');
     }
 
     xhr.onprogress = (event) => {
@@ -78,7 +76,6 @@ async function load_metadata(file_id) {
     let request = await fetch("/metadata/" + file_id);
     if (request.ok){
         let fm = await request.json();
-        console.log(fm);
         return fm;
     }else{
         alert("Couldn't find requested file.");

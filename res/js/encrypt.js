@@ -32,7 +32,6 @@ function encrypt_file(){
             key,
             data
         );
-        console.log(filename);
         let encrypted_file_name = await window.crypto.subtle.encrypt(
             {
                 name: "AES-GCM",
@@ -55,6 +54,11 @@ function encrypt_file(){
         upload.append("file_iv", arrayBufferToBase64(file_iv));
         upload.append("filename_iv", arrayBufferToBase64(filename_iv));
 
+        let auto_delete = document.getElementById("auto-delete-select").value;
+        if(auto_delete !== "default"){
+            upload.append("auto_delete", auto_delete);
+        }
+
         ajax.send(upload);
     };
 }
@@ -74,6 +78,7 @@ function myProgressHandler(event) {
     if(progress_div.style.display === "none"){
         progress_div.style.display = "block";
         document.getElementById("file-picker").style.display = "none";
+        document.getElementById("auto-delete-select").style.display = "none";
     }
     progress_bar.style.width = p+"%";
     progress_bar.innerText = p+"%";
@@ -81,18 +86,22 @@ function myProgressHandler(event) {
 }
 
 function showQRCode(event) {
-    let file_id = event.target.responseText;
-    let url = "http://127.0.0.1:8000/d/"+file_id+"#key="+exported_key;
-    new QRCode(document.getElementById("qrcode"), {
-        text: url,
-        width: 128,
-        height: 128,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
-    document.getElementById("sharelink").value = url;
-    document.getElementById("upload-success").style.display = "";
+    if(event.target.status !== 200){
+        alert("Couldn't upload file. Maybe it's to large?");
+    }else{
+        let file_id = event.target.responseText;
+        let url = location.origin+"/d/"+file_id+"#key="+exported_key;
+        new QRCode(document.getElementById("qrcode"), {
+            text: url,
+            width: 128,
+            height: 128,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        document.getElementById("sharelink").value = url;
+        document.getElementById("upload-success").style.display = "";
+    }
 }
 
 function str2ab(str) {
