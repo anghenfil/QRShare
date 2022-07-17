@@ -27,31 +27,6 @@ window.addEventListener('load', async function () {
     document.getElementById("download_button").onclick = function(){
         load_file(file_id, key, base64ToArrayBuffer(metadata.file_iv), filename);
     }
-/*
-    var xhttp = new XMLHttpRequest();
-    xhttp.responseType = "arraybuffer";
-    xhttp.onreadystatechange = async function () {
-        if (this.readyState == 4 && this.status == 200) {
-
-            //let file = str2ab(this.response);
-            let decrypted = await window.crypto.subtle.decrypt(
-                {
-                    name: "AES-GCM",
-                    iv: new Uint8Array("123")
-                },
-                key,
-                this.response
-            );
-            let link = document.createElement('a');
-            link.download = 'welcome.jpg';
-            let blob = new Blob([decrypted], {});
-            link.href = URL.createObjectURL(blob);
-            link.click();
-        }
-    };
-    xhttp.open("GET", "/download/"+file_id, true);
-    xhttp.send();
-    */
 });
 
 async function load_file(file_id, key, iv, filename){
@@ -93,10 +68,6 @@ async function load_file(file_id, key, iv, filename){
         progress_bar.style.width = p+"%";
         progress_bar.innerText = p+"%";
         document.title = p+'%';
-        // event.loaded returns how many bytes are downloaded
-        // event.total returns the total number of bytes
-        // event.total is only available if server sends `Content-Length` header
-        console.log(`Downloaded ${event.loaded} of ${event.total} bytes`);
     }
 
     xhr.open('GET', '/download/'+file_id, true);

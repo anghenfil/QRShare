@@ -94,6 +94,7 @@ function showQRCode(event) {
     document.getElementById("sharelink").value = url;
     document.getElementById("upload-success").style.display = "";
 }
+
 function str2ab(str) {
     var enc = new TextEncoder();
     return enc.encode(str);
