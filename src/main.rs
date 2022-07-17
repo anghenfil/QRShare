@@ -116,7 +116,7 @@ fn rocket() -> _ {
 
     //Clear upload directory
     let path = "uploads";
-    fs::remove_dir_all(path).unwrap();
+    fs::remove_dir_all(path);
     fs::create_dir(path).unwrap();
 
     let storage_copy = Arc::from(storage);
